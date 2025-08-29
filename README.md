@@ -27,3 +27,93 @@ Permite convertir los textos de modelos, vistas o etiquetas de **inglés → esp
 - Librerías:
   ```bash
   pip install requests
+
+## Pasos detallados (ejecución local)
+
+Instalar Python
+
+Verifica versión:
+python --version o python3 --version
+
+Si no tienes Python 3.10+, instálalo desde python.org o el gestor de tu SO.
+
+Preparar carpeta del proyecto
+
+mkdir xliff-translator
+cd xliff-translator
+
+
+Crear y activar entorno virtual
+
+Windows:
+
+python -m venv venv
+.\venv\Scripts\activate
+
+
+macOS / Linux:
+
+python3 -m venv venv
+source venv/bin/activate
+
+
+Instalar dependencias
+
+pip install requests
+
+
+Si vas a crear ejecutable más adelante: pip install pyinstaller
+
+Si estás en Linux y la GUI falla, instala tkinter: sudo apt-get install python3-tk (Debian/Ubuntu).
+
+## ## Guardar el script
+Crea translator.py y pega el código corregido que te doy más abajo (sobrescribe el archivo original).
+
+Ejecutar
+
+Por CLI con archivo:
+
+python translator.py /ruta/al/archivo.xlf
+
+
+O sin argumentos: se abrirá dialog para seleccionar archivo y te pedirá elegir método (1 automático / 2 manual).
+
+Probar con un archivo pequeño antes de usar un XLIFF grande (así detectas problemas de encoding o formato).
+
+Si quieres .exe (Windows):
+
+pyinstaller --onefile translator.py
+
+
+El ejecutable estará en dist/translator.exe.
+
+## 3) Subir a GitHub (opcional)
+git init
+echo "venv/" > .gitignore
+git add translator.py
+git commit -m "Añadir traductor XLIFF"
+# luego crea repo en GitHub y haz:
+git remote add origin git@github.com:TU_USUARIO/tu-repo.git
+git push -u origin main
+
+## 4) Importar el XLIFF resultante en SAP Datasphere
+
+(Ya tu script imprime instrucciones, aquí un poco más detallado)
+
+Entra a tu espacio/trabajo en SAP Datasphere.
+
+Busca la sección de Localizations / Translations (o el módulo donde importas archivos XLIFF).
+
+Elige Import translations y sube el archivo _AUTO_ES.xlf generado.
+
+Verifica que las cadenas aparezcan y realiza pruebas en un ambiente de desarrollo antes de mover a producción.
+
+Nota: si Datasphere requiere códigos de idioma específicos (ej. es-ES), adapta target_lang antes de importar.
+
+##5) Riesgos y recomendaciones
+
+El endpoint https://translate.googleapis.com/translate_a/single es no oficial y puede dejar de funcionar o aplicarte límites. Para uso serio/producción usa Google Cloud Translate API (requiere proyecto, facturación y credenciales) o DeepL API (muy buena calidad para ES).
+
+Respeta límites y añade time.sleep() (ya lo hiciste) para evitar bloqueos por muchas solicitudes simultáneas.
+
+Respaldar siempre el archivo original XLIFF antes de sobrescribir.
