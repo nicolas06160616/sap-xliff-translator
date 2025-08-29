@@ -66,7 +66,7 @@ Si vas a crear ejecutable más adelante: pip install pyinstaller
 
 Si estás en Linux y la GUI falla, instala tkinter: sudo apt-get install python3-tk (Debian/Ubuntu).
 
-## ## Guardar el script
+## Guardar el script
 Crea translator.py y pega el código corregido que te doy más abajo (sobrescribe el archivo original).
 
 Ejecutar
@@ -87,16 +87,8 @@ pyinstaller --onefile translator.py
 
 El ejecutable estará en dist/translator.exe.
 
-## 3) Subir a GitHub (opcional)
-git init
-echo "venv/" > .gitignore
-git add translator.py
-git commit -m "Añadir traductor XLIFF"
-# luego crea repo en GitHub y haz:
-git remote add origin git@github.com:TU_USUARIO/tu-repo.git
-git push -u origin main
 
-## 4) Importar el XLIFF resultante en SAP Datasphere
+## 3) Importar el XLIFF resultante en SAP Datasphere
 
 (Ya tu script imprime instrucciones, aquí un poco más detallado)
 
